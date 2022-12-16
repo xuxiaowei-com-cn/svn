@@ -69,3 +69,5 @@ WORKDIR /home/svn/subversion-1.14.2
 RUN ls
 # 配置并指定目录
 RUN ./configure --prefix=/usr/local/svn
+RUN make
+RUN make install
