@@ -22,6 +22,8 @@ RUN ls
 RUN yum -y install gcc
 # /bin/sh: make: command not found
 RUN yum -y install make
+#  #include <expat.h>
+RUN yum -y install expat-devel
 
 # SVN 环境准备
 # configure: WARNING: APR not found
