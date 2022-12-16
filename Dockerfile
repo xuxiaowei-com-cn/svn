@@ -104,6 +104,15 @@ RUN /usr/local/bin/svn --version
 WORKDIR /
 RUN svn --version
 
+RUN yum -y remove gcc
+RUN yum -y remove make
+RUN yum -y remove expat-devel
+RUN yum -y remove unzip
+RUN yum -y remove zlib-devel
+RUN yum -y remove lz4-devel
+RUN /usr/local/bin/svn --version
+RUN svn --version
+
 # 第二阶段，使用第一阶段编译构建好的可执行文件来构建 git 镜像
 
 FROM openanolis/anolisos:8.6
