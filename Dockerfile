@@ -13,6 +13,7 @@ WORKDIR /home/svn
 ADD subversion-1.14.2.tar.gz .
 ADD apr-1.7.0.tar.gz .
 ADD apr-util-1.6.1.tar.gz .
+ADD sqlite-amalgamation-3081101.zip .
 
 # 查看文件
 RUN ls
@@ -24,6 +25,8 @@ RUN yum -y install gcc
 RUN yum -y install make
 #  #include <expat.h>
 RUN yum -y install expat-devel
+# 用于解压 .zip 文件
+RUN yum -y install unzip
 
 # SVN 环境准备
 # configure: WARNING: APR not found
@@ -42,6 +45,12 @@ WORKDIR /home/svn/apr-util-1.6.1
 RUN ./configure --with-apr=/usr/local/apr
 RUN make
 RUN make install
+
+# SVN 环境准备
+# configure: error: Subversion requires SQLite
+WORKDIR /home/svn/
+RUN unzip sqlite-amalgamation-3081101.zip
+RUN mv sqlite-amalgamation-3081101 /home/svn/subversion-1.14.2/sqlite-amalgamation
 
 # 调整工作空间
 WORKDIR /home/svn/subversion-1.14.2
