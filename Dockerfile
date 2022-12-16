@@ -29,6 +29,8 @@ RUN yum -y install expat-devel
 RUN yum -y install unzip
 # configure: error: subversion requires zlib
 RUN yum -y install zlib-devel
+# configure: error: Subversion requires LZ4 >= r129, or use --with-lz4=internal
+RUN yum -y install lz4-devel
 
 # SVN 环境准备
 # configure: WARNING: APR not found
