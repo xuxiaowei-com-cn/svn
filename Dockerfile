@@ -41,6 +41,11 @@ WORKDIR /home/svn/apr-1.7.0
 RUN ./configure
 RUN make
 RUN make install
+RUN ls /usr/local/apr/
+RUN ls /usr/local/apr/lib/
+RUN ls /usr/local/apr/lib/pkgconfig/
+RUN ls /usr/local/apr/include/
+
 
 # SVN 环境准备
 # configure: WARNING: APRUTIL not found
@@ -50,18 +55,26 @@ WORKDIR /home/svn/apr-util-1.6.1
 RUN ./configure --with-apr=/usr/local/apr
 RUN make
 RUN make install
+RUN ls /usr/local/apr/
+RUN ls /usr/local/apr/lib/
+RUN ls /usr/local/apr/lib/pkgconfig/
+RUN ls /usr/local/apr/include/
 
 # SVN 环境准备
 # configure: error: Subversion requires SQLite
 WORKDIR /home/svn/
 RUN unzip sqlite-amalgamation-3081101.zip
 RUN mv sqlite-amalgamation-3081101 /home/svn/subversion-1.14.2/sqlite-amalgamation
+RUN ls /home/svn/subversion-1.14.2/sqlite-amalgamation/
 
 # SVN 环境准备
 # configure: error: Subversion requires UTF8PROC; install it or re-run configure with "--with-utf8proc=internal"
 WORKDIR /home/svn/utf8proc-2.8.0
 RUN make
 RUN make install
+RUN ls /usr/local/include/
+RUN ls /usr/local/lib/
+RUN ls /usr/local/lib/pkgconfig/
 
 # 调整工作空间
 WORKDIR /home/svn/subversion-1.14.2
@@ -71,3 +84,11 @@ RUN ls
 RUN ./configure --prefix=/usr/local/svn
 RUN make
 RUN make install
+RUN ls /usr/local/svn/
+RUN ls /usr/local/svn/share/
+RUN ls /usr/local/svn/share/pkgconfig/
+RUN ls /usr/local/svn/include/
+RUN ls /usr/local/svn/include/subversion-1/
+RUN ls /usr/local/svn/lib/
+RUN ls /usr/local/svn/bin/
+RUN /usr/local/svn/bin/svn --version
