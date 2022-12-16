@@ -15,6 +15,10 @@ ADD subversion-1.14.2.tar.gz .
 # 查看文件
 RUN ls
 
+# 配置、编译、安装环境准备
+# configure: error: no acceptable C compiler found in $PATH
+RUN yum -y install gcc
+
 # 调整工作空间
 WORKDIR /home/svn/subversion-1.14.2
 # 查看文件
