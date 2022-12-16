@@ -137,3 +137,6 @@ COPY --from=svn-make /usr/local/bin/svn* /usr/local/bin/
 RUN ls /usr/local/bin/svn*
 RUN /usr/local/bin/svn --version
 RUN svn --version
+
+# SVN 端口
+EXPOSE 3690
