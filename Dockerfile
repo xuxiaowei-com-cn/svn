@@ -33,6 +33,8 @@ RUN yum -y install zlib-devel
 # configure: error: Subversion requires LZ4 >= r129, or use --with-lz4=internal
 RUN yum -y install lz4-devel
 
+RUN ls /usr/local/
+
 # SVN 环境准备
 # configure: WARNING: APR not found
 # Subversion with both the --with-apr and --with-apr-util options.
@@ -41,6 +43,7 @@ WORKDIR /home/svn/apr-1.7.0
 RUN ./configure
 RUN make
 RUN make install
+RUN ls /usr/local/
 RUN ls /usr/local/apr/
 RUN ls /usr/local/apr/lib/
 RUN ls /usr/local/apr/lib/pkgconfig/
@@ -55,6 +58,7 @@ WORKDIR /home/svn/apr-util-1.6.1
 RUN ./configure --with-apr=/usr/local/apr
 RUN make
 RUN make install
+RUN ls /usr/local/
 RUN ls /usr/local/apr/
 RUN ls /usr/local/apr/lib/
 RUN ls /usr/local/apr/lib/pkgconfig/
@@ -72,6 +76,7 @@ RUN ls /home/svn/subversion-1.14.2/sqlite-amalgamation/
 WORKDIR /home/svn/utf8proc-2.8.0
 RUN make
 RUN make install
+RUN ls /usr/local/
 RUN ls /usr/local/include/
 RUN ls /usr/local/lib/
 RUN ls /usr/local/lib/pkgconfig/
@@ -84,3 +89,22 @@ RUN ls
 RUN ./configure
 RUN make
 RUN make install
+RUN ls /usr/local/
+RUN ls /usr/local/bin/
+RUN ls /usr/local/bin/svn*
+RUN /usr/local/bin/svn --version
+
+# 第二阶段，使用第一阶段编译构建好的可执行文件来构建 git 镜像
+
+FROM openanolis/anolisos:8.6
+
+WORKDIR /home
+
+# 从第一阶段中复制构建好的可执行文件
+COPY --from=svn-make /usr/local/apr/ /usr/local/apr/
+COPY --from=svn-make /usr/local/include/ /usr/local/include/
+COPY --from=svn-make /usr/local/lib/ /usr/local/lib/
+COPY --from=svn-make /usr/local/bin/svn* /usr/local/bin/
+RUN ls /usr/local/bin/svn*
+RUN /usr/local/bin/svn --version
+RUN svn --version
