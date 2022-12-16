@@ -21,7 +21,6 @@ RUN ls
 RUN ls /usr/local/
 RUN ls /usr/local/include/
 RUN ls /usr/local/lib/
-RUN ls /usr/local/bin/svn*
 
 # 配置、编译、安装环境准备
 # configure: error: no acceptable C compiler found in $PATH
