@@ -19,6 +19,8 @@ RUN ls
 # 配置、编译、安装环境准备
 # configure: error: no acceptable C compiler found in $PATH
 RUN yum -y install gcc
+# /bin/sh: make: command not found
+RUN yum -y install make
 
 # 配置 SVN 环境准备
 # Subversion with both the --with-apr and --with-apr-util options.
