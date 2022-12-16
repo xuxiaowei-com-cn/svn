@@ -22,6 +22,7 @@ RUN ls /usr/local/
 RUN ls /usr/local/include/ && echo '可以看到，现在未安装任何软件时，/usr/local/include/ 文件夹为空'
 RUN ls /usr/local/lib/ && echo '可以看到，现在未安装任何软件时，/usr/local/lib/ 文件夹为空'
 RUN ls /usr/local/share/
+RUN ls /usr/local/share/man
 
 # 配置、编译、安装环境准备
 # configure: error: no acceptable C compiler found in $PATH
@@ -41,6 +42,7 @@ RUN ls /usr/local/
 RUN ls /usr/local/include/ && echo '可以看到，yum 安装文件后，/usr/local/include/ 文件夹为空'
 RUN ls /usr/local/lib/ && echo '可以看到，yum 安装文件后，/usr/local/lib/ 文件夹为空'
 RUN ls /usr/local/share/
+RUN ls /usr/local/share/man
 
 # SVN 环境准备
 # configure: WARNING: APR not found
