@@ -9,6 +9,7 @@ docker-build:
   script:
     - wget https://dlcdn.apache.org/subversion/subversion-1.14.2.tar.gz
     - wget https://dlcdn.apache.org//apr/apr-1.7.0.tar.gz
+    - wget https://dlcdn.apache.org//apr/apr-util-1.6.1.tar.gz
     - docker build -t svn:1.14.2 .
   after_script:
     - docker images

@@ -12,6 +12,7 @@ WORKDIR /home/svn
 # 添加 SVN 源码
 ADD subversion-1.14.2.tar.gz .
 ADD apr-1.7.0.tar.gz .
+ADD apr-util-1.6.1.tar.gz .
 
 # 查看文件
 RUN ls
@@ -22,10 +23,20 @@ RUN yum -y install gcc
 # /bin/sh: make: command not found
 RUN yum -y install make
 
-# 配置 SVN 环境准备
+# SVN 环境准备
+# configure: WARNING: APR not found
 # Subversion with both the --with-apr and --with-apr-util options.
 # configure: error: no suitable APR found
 WORKDIR /home/svn/apr-1.7.0
+RUN ./configure
+RUN make
+RUN make install
+
+# SVN 环境准备
+# configure: WARNING: APRUTIL not found
+#  appropriate --with-apr-util option.
+# configure: error: no suitable APRUTIL found
+WORKDIR /home/svn/apr-util-1.6.1
 RUN ./configure
 RUN make
 RUN make install
