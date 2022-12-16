@@ -37,7 +37,7 @@ RUN make install
 #  appropriate --with-apr-util option.
 # configure: error: no suitable APRUTIL found
 WORKDIR /home/svn/apr-util-1.6.1
-RUN ./configure
+RUN ./configure --with-apr=/usr/local/apr
 RUN make
 RUN make install
 
