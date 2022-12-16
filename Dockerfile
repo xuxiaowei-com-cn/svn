@@ -19,8 +19,9 @@ ADD utf8proc-2.8.0.tar.gz .
 # 查看文件
 RUN ls
 RUN ls /usr/local/
-RUN ls /usr/local/include/
-RUN ls /usr/local/lib/
+RUN ls /usr/local/include/ && echo '可以看到，现在未安装任何软件时，/usr/local/include/ 文件夹为空'
+RUN ls /usr/local/lib/ && echo '可以看到，现在未安装任何软件时，/usr/local/lib/ 文件夹为空'
+RUN ls /usr/local/share/
 
 # 配置、编译、安装环境准备
 # configure: error: no acceptable C compiler found in $PATH
@@ -37,6 +38,9 @@ RUN yum -y install zlib-devel
 RUN yum -y install lz4-devel
 
 RUN ls /usr/local/
+RUN ls /usr/local/include/ && echo '可以看到，yum 安装文件后，/usr/local/include/ 文件夹为空'
+RUN ls /usr/local/lib/ && echo '可以看到，yum 安装文件后，/usr/local/lib/ 文件夹为空'
+RUN ls /usr/local/share/
 
 # SVN 环境准备
 # configure: WARNING: APR not found
@@ -110,6 +114,7 @@ WORKDIR /home
 COPY --from=svn-make /usr/local/apr/ /usr/local/apr/
 COPY --from=svn-make /usr/local/include/ /usr/local/include/
 COPY --from=svn-make /usr/local/lib/ /usr/local/lib/
+COPY --from=svn-make /usr/local/share/ /usr/local/share/
 COPY --from=svn-make /usr/local/bin/svn* /usr/local/bin/
 RUN ls /usr/local/bin/svn*
 RUN /usr/local/bin/svn --version
