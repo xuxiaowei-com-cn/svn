@@ -21,8 +21,6 @@ RUN ls
 RUN ls /usr/local/
 RUN ls /usr/local/include/ && echo '可以看到，现在未安装任何软件时，/usr/local/include/ 文件夹为空'
 RUN ls /usr/local/lib/ && echo '可以看到，现在未安装任何软件时，/usr/local/lib/ 文件夹为空'
-RUN ls /usr/local/share/
-RUN ls /usr/local/share/man
 
 # 配置、编译、安装环境准备
 # configure: error: no acceptable C compiler found in $PATH
@@ -41,8 +39,6 @@ RUN yum -y install lz4-devel
 RUN ls /usr/local/
 RUN ls /usr/local/include/ && echo '可以看到，yum 安装文件后，/usr/local/include/ 文件夹为空'
 RUN ls /usr/local/lib/ && echo '可以看到，yum 安装文件后，/usr/local/lib/ 文件夹为空'
-RUN ls /usr/local/share/
-RUN ls /usr/local/share/man
 
 # SVN 环境准备
 # configure: WARNING: APR not found
@@ -125,7 +121,18 @@ WORKDIR /home
 COPY --from=svn-make /usr/local/apr/ /usr/local/apr/
 COPY --from=svn-make /usr/local/include/ /usr/local/include/
 COPY --from=svn-make /usr/local/lib/ /usr/local/lib/
-COPY --from=svn-make /usr/local/share/ /usr/local/share/
+
+COPY --from=svn-make /usr/local/share/man/man1/svn.1 /usr/local/share/man/man1/svn.1
+COPY --from=svn-make /usr/local/share/man/man1/svnadmin.1 /usr/local/share/man/man1/svnadmin.1
+COPY --from=svn-make /usr/local/share/man/man1/svndumpfilter.1 /usr/local/share/man/man1/svndumpfilter.1
+COPY --from=svn-make /usr/local/share/man/man1/svnlook.1 /usr/local/share/man/man1/svnlook.1
+COPY --from=svn-make /usr/local/share/man/man1/svnmucc.1 /usr/local/share/man/man1/svnmucc.1
+COPY --from=svn-make /usr/local/share/man/man1/svnrdump.1 /usr/local/share/man/man1/svnrdump.1
+COPY --from=svn-make /usr/local/share/man/man8/svnserve.8 /usr/local/share/man/man8/svnserve.8
+COPY --from=svn-make /usr/local/share/man/man5/svnserve.conf.5 /usr/local/share/man/man5/svnserve.conf.5
+COPY --from=svn-make /usr/local/share/man/man1/svnsync.1 /usr/local/share/man/man1/svnsync.1
+COPY --from=svn-make /usr/local/share/man/man1/svnversion.1 /usr/local/share/man/man1/svnversion.1
+
 COPY --from=svn-make /usr/local/bin/svn* /usr/local/bin/
 RUN ls /usr/local/bin/svn*
 RUN /usr/local/bin/svn --version
