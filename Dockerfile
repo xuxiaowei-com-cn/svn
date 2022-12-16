@@ -27,6 +27,8 @@ RUN yum -y install make
 RUN yum -y install expat-devel
 # 用于解压 .zip 文件
 RUN yum -y install unzip
+# configure: error: subversion requires zlib
+RUN yum -y install zlib-devel
 
 # SVN 环境准备
 # configure: WARNING: APR not found
