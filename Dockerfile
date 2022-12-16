@@ -81,14 +81,6 @@ WORKDIR /home/svn/subversion-1.14.2
 # 查看文件
 RUN ls
 # 配置并指定目录
-RUN ./configure --prefix=/usr/local/svn
+RUN ./configure
 RUN make
 RUN make install
-RUN ls /usr/local/svn/
-RUN ls /usr/local/svn/share/
-RUN ls /usr/local/svn/share/pkgconfig/
-RUN ls /usr/local/svn/include/
-RUN ls /usr/local/svn/include/subversion-1/
-RUN ls /usr/local/svn/lib/
-RUN ls /usr/local/svn/bin/
-RUN /usr/local/svn/bin/svn --version
