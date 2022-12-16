@@ -94,6 +94,9 @@ RUN ls /usr/local/bin/
 RUN ls /usr/local/bin/svn*
 RUN /usr/local/bin/svn --version
 
+WORKDIR /
+RUN svn --version
+
 # 第二阶段，使用第一阶段编译构建好的可执行文件来构建 git 镜像
 
 FROM openanolis/anolisos:8.6
