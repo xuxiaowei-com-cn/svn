@@ -14,6 +14,7 @@ ADD subversion-1.14.2.tar.gz .
 ADD apr-1.7.0.tar.gz .
 ADD apr-util-1.6.1.tar.gz .
 ADD sqlite-amalgamation-3081101.zip .
+ADD utf8proc-2.8.0.tar.gz .
 
 # 查看文件
 RUN ls
@@ -55,6 +56,12 @@ RUN make install
 WORKDIR /home/svn/
 RUN unzip sqlite-amalgamation-3081101.zip
 RUN mv sqlite-amalgamation-3081101 /home/svn/subversion-1.14.2/sqlite-amalgamation
+
+# SVN 环境准备
+# configure: error: Subversion requires UTF8PROC; install it or re-run configure with "--with-utf8proc=internal"
+WORKDIR /home/svn/utf8proc-2.8.0
+RUN make
+RUN make install
 
 # 调整工作空间
 WORKDIR /home/svn/subversion-1.14.2
