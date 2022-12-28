@@ -140,3 +140,28 @@ RUN svn --version
 
 # SVN 端口
 EXPOSE 3690
+
+# 创建文件夹
+RUN mkdir /svn-data
+
+# 创建 SVN 仓库
+RUN svnadmin create /svn-data/test
+
+# 将 # anon-access = read 替换为 anon-access = none
+# 禁止匿名访问
+# “#”需要转译
+RUN sed -i "s/\# anon-access = read/anon-access = none/g" /svn-data/test/conf/svnserve.conf
+
+RUN sed -i "s/\# auth-access = write/auth-access = write/g" /svn-data/test/conf/svnserve.conf
+RUN sed -i "s/\# password-db = passwd/password-db = passwd/g" /svn-data/test/conf/svnserve.conf
+RUN sed -i "s/\# authz-db = authz/authz-db = authz/g" /svn-data/test/conf/svnserve.conf
+
+# 创建用户
+# 用户名：xuxiaowei
+# 密码：123456
+RUN echo 'xuxiaowei = 123456' >> /svn-data/test/conf/passwd
+
+# 设置目录的权限
+RUN echo '[/]' >> /svn-data/test/conf/authz
+RUN echo 'xuxiaowei = rw' >> /svn-data/test/conf/authz
+RUN echo '*=' >> /svn-data/test/conf/authz
