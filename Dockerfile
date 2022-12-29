@@ -165,3 +165,5 @@ RUN echo 'xuxiaowei = 123456' >> /svn-data/test/conf/passwd
 RUN echo '[/]' >> /svn-data/test/conf/authz
 RUN echo 'xuxiaowei = rw' >> /svn-data/test/conf/authz
 RUN echo '*=' >> /svn-data/test/conf/authz
+
+ENV LC_ALL=C
