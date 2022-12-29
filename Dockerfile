@@ -168,8 +168,6 @@ RUN echo '*=' >> /svn-data/test/conf/authz
 
 ENV LC_ALL=C
 
-RUN find / -name svnserve
-
 RUN echo '/usr/local/bin/svnserve -d -r /svn-data' > /home/start.sh
 RUN chmod 755 /home/start.sh
 # sleep infinity：常驻内存
