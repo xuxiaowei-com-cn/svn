@@ -101,6 +101,17 @@
   </a>
 </div>
 
+## 使用
+
+```shell
+# --restart always：自动启动
+# --name svn：容器的名称为 svn
+# -p 3690:3690：开放端口，默认端口为 3690
+# -v svn-data:/svn-data：挂载卷，数据储存位置
+# -d svn:1.14.2：指定镜像名称
+docker run -itd --restart always --name svn -p 3690:3690 -v svn-data:/svn-data -d xuxiaoweicomcn/svn:1.14.2
+```
+
 ## [GitLab 流水线](https://gitlab.com/xuxiaowei-com-cn/svn/-/pipelines)
 
 ## Stargazers over time
