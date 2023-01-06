@@ -112,6 +112,23 @@
 docker run -itd --restart always --name svn -p 3690:3690 -v svn-data:/svn-data -d xuxiaoweicomcn/svn:1.14.2
 ```
 
+## 批量添加远端仓库地址
+
+<details>
+<summary>点击展开</summary>
+git remote add gitee https://gitee.com/xuxiaowei-com-cn/svn.git
+
+git remote add gitlab https://gitlab.com/xuxiaowei-com-cn/svn.git
+
+git remote add jihulab https://jihulab.com/xuxiaowei-com-cn/svn.git
+
+git remote add github https://github.com/xuxiaowei-com-cn/svn.git
+
+git remote add gitcode https://gitcode.net/xuxiaowei-com-cn/svn.git
+
+git remote add gitlink https://gitlink.org.cn/xuxiaowei-com-cn/svn.git
+</details>
+
 ## [GitLab 流水线](https://gitlab.com/xuxiaowei-com-cn/svn/-/pipelines)
 
 ## Stargazers over time
